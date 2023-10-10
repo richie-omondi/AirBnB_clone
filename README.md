@@ -1,7 +1,7 @@
 ### AirBnB Clone - The Console//Command Interpreter
 
 ## Description
-This is a group project. It's the first step towards building a full web application: an AirBnB clone.
+This is a group project done by [Maxmillan Rutto](https://github.com/Maxrutto) and [Richard Orido](https://github.com/richie-omondi). It's the first step towards building a full web application: an AirBnB clone.
 This first step consists of a custom command-line interface for data management and the base classes for the storage of this data.
 
 ## Functionalities of this command interpreter:
