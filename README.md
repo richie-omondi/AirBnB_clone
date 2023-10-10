@@ -26,7 +26,7 @@ This project is interpreted/tested on `Ubuntu 14.04 LTS` using python3 (version 
 
 ## Tests
 
-All the code is tested with the unittest module. The test for the classes are in the`test_models folder`.
+All the code is tested with the unittest module. The tests for all the classes and functions are in the `tests` folder.
 
 ## Authors
 * [Richard Orido](https://github.com/richie-omondi)
