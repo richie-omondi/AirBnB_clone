@@ -32,9 +32,9 @@ class BaseModel:
     def to_dict(self):
         """ Return the dictionary format of the BaseModel instance"""
         dict = self.__dict__.copy()
-        dict["__class__"] = type(self).__name__
         dict["__created_at__"] = self.created_at.isoformat
         dict["__updated_at__"] = self.updated_at.isoformat
+        dict["__class__"] = type(self).__name__
 
         return dict 
 
