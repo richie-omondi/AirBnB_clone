@@ -79,14 +79,38 @@ class TestFileStorage_instantiation(unittest.TestCase):
         self.assertEqual(dict, type(FileStorage._FileStorage__objects))
 
 class TestFileStorage_methods(unittest.TestCase):
-    """Unittests for testing methods of the FileStorage class """
+    """ Unittests for testing methods of the FileStorage class """
 
     def test_all(self):
+        """ Test whether the return type is a dictionary """
         self.assertEqual(dict, type(models.storage.all()))
 
     def test_all_with_arg(self):
+        """ Test whether an exception is raised when None is passed as an argument to the metod"""
         with self.assertRaises(TypeError):
             models.storage.all(None)
+
+    def test_new_with_args(self):
+        """ Test whether an exception is raised when an instance and
+            an integer value of 1 is passed to the method 
+        """
+        with self.assertRaises(TypeError):
+            models.storage.new(BaseModel(), 1)
+    
+    def test_new_with_None(self):
+        """ Test whether an exception is raised when None is passed as an argument to the method"""
+        with self.assertRaises(AttributeError):
+            models.storage.new(None)
+    
+    def test_save_with_arg(self):
+        """ Test whether an exception is raised when None is passed as an argument to the method"""
+        with self.assertRaises(TypeError):
+            models.storage.save(None)
+
+    def test_reload_with_arg(self):
+        """ Test whether an excpetion is raised when None is passed as an argument to the method """
+        with self.assertRaises(TypeError):
+            models.storage.reload(None)
 
 if __name__ == "__main__":
     unittest.main()
