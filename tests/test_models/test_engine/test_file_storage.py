@@ -9,9 +9,7 @@ Unittest classes:
 import unittest
 from models.engine.file_storage import FileStorage
 import models
-from uuid import UUID
-from datetime import datetime
-
+from models.base_model import BaseModel
 
 class TestFileStorage_docs(unittest.TestCase):
     """ Unit tests for testing documentation in class FileStorage"""
