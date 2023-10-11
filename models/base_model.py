@@ -39,6 +39,6 @@ class BaseModel:
         return dict 
 
     def __str__(self):
-        """ Returns/Prints an official string representation of the class"""
+        """ Returns or Prints an official string representation of the class"""
         class_name = type(self).__name__
         return "[{}] ({}) {}".format(class_name, self.id, self.__dict__)
