@@ -2,6 +2,9 @@
 """Defines the FileStorage class"""
 
 import json
+from json import loads
+from os.path import isfile
+from models.base_model import BaseModel
 
 class FileStorage:
     """Serializes instances to a JSON file
@@ -33,12 +36,13 @@ class FileStorage:
 
     def reload(self):
         """Deserialize the JSON file __file_path to __objects dictionary, if the file path exists."""
-        try:
-            with open(FileStorage.__file_path) as f:
-                obj_dict = json.load(f)
-                for o in obj_dict.values():
-                    class_name = o["__class__"]
-                    del o["__class__"]
-                    self.new(eval(class_name)(**o))
-        except FileNotFoundError:
-            return
+        allowed_classes = ["BaseModel"]
+        file_name = FileStorage.__file_path
+        if isfile(file_name):
+            with open(file_name, "r") as f:
+                json_string = f.read()
+                json_load = loads(json_string)
+            for key, value in json_load.items():
+                class_name, obj_id = key.split(".")
+                if class_name in allowed_classes:
+                    eval("self.new({}(**value))".format(class_name))
