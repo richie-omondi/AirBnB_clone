@@ -2,9 +2,15 @@
 """Defines the FileStorage class"""
 
 import json
-from json import loads
+from json import loads, dumps
 from os.path import isfile
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 class FileStorage:
     """Serializes instances to a JSON file
@@ -29,14 +35,21 @@ class FileStorage:
 
     def save(self):
         """Serialize __objects to the JSON file __file_path."""
-        obj_dict_1 = FileStorage.__objects
-        obj_dict_2 = {obj: obj_dict_1[obj].to_dict() for obj in obj_dict_1.keys()}
-        with open(FileStorage.__file_path, "w") as f:
-            json.dump(obj_dict_2, f)
+        dict = {
+                key: value.to_dict() for key, value
+                in FileStorage.__objects.items()}
+        json_string = dumps(dict)
+        filename = FileStorage.__file_path
+        with open(filename, "w") as f:
+            f.write(json_string)
 
     def reload(self):
-        """Deserialize the JSON file __file_path to __objects dictionary, if the file path exists."""
-        allowed_classes = ["BaseModel"]
+        """
+        Deserialize the JSON file __file_path to __objects dictionary, 
+        if the file path exists
+        """
+        allowed_classes = ["BaseModel", "User", "State",
+                           "City", "Place", "Amenity", "Review"]
         file_name = FileStorage.__file_path
         if isfile(file_name):
             with open(file_name, "r") as f:

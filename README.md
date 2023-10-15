@@ -8,10 +8,10 @@ This first step consists of a custom command-line interface for data management 
 ## Functionalities of this command interpreter
 
 * Create a new object (ex: a new `User` or a new `Place`)
-* Retrieve an object from a file or a database
+* Retrieve an object from a file or a database (Seralization and Deserialization)
 * Do operations on objects (`count`, `compute stats`, etc...)
-* Update attributes of an object
-* Destroy an object
+* Update attributes of an object (`update()`)
+* Destroy an object(`destroy()`)
   
 ## Environment
 
