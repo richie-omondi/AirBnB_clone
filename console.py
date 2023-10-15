@@ -206,49 +206,49 @@ class HBNBCommand(cmd.Cmd):
         Executes the method called on the User class
         """
         class_name = "User"
-        self.data_model_func(arg, class_name)
+        self.execute_method(arg, class_name)
 
     def do_BaseModel(self, arg):
         """
         Executes the method called on class BaseModel
         """
         class_name = "BaseModel"
-        self.data_model_func(arg, class_name)
+        self.execute_method(arg, class_name)
 
     def do_State(self, arg):
         """
         Executes the method called on the State class
         """
         class_name = "State"
-        self.data_model_func(arg, class_name)
+        self.execute_method(arg, class_name)
 
     def do_City(self, arg):
         """
         Executes the method called on the City class
         """
         class_name = "City"
-        self.data_model_func(arg, class_name)
+        self.execute_method(arg, class_name)
 
     def do_Amenity(self, arg):
         """
         Executes the method called on the Amenity class
         """
         class_name = "Amenity"
-        self.data_model_func(arg, class_name)
+        self.execute_method(arg, class_name)
 
     def do_Place(self, arg):
         """
         Executes the method called on the Place class
         """
         class_name = "Place"
-        self.data_model_func(arg, class_name)
+        self.execute_method(arg, class_name)
 
     def do_Review(self, arg):
         """
         Executes the method called on the Review class
         """
         class_name = "Review"
-        self.data_model_func(arg, class_name)
+        self.execute_method(arg, class_name)
 
     def execute_method(self, arg, class_name):
         """
