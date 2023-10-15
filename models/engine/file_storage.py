@@ -12,6 +12,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class FileStorage:
     """Serializes instances to a JSON file
         and deserializes a JSON file to an instance
@@ -26,7 +27,7 @@ class FileStorage:
     def all(self):
         """Returns the __objects dictionary"""
         return FileStorage.__objects
-    
+
     def new(self, obj):
         """Set in __objects the obj with key <obj class_name>.id"""
         key = f"{obj.__class__.__name__}.{obj.id}"
@@ -45,7 +46,7 @@ class FileStorage:
 
     def reload(self):
         """
-        Deserialize the JSON file __file_path to __objects dictionary, 
+        Deserialize the JSON file __file_path to __objects dictionary,
         if the file path exists
         """
         allowed_classes = ["BaseModel", "User", "State",

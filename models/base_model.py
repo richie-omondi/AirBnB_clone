@@ -5,6 +5,7 @@ from datetime import datetime
 import uuid
 import models
 
+
 class BaseModel:
     """ Represents the BaseModel of the HBnB project"""
 
@@ -26,7 +27,7 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = self.created_at
             models.storage.new(self)
-    
+
     def save(self):
         """ Update updated_at with the current datetime"""
         self.updated_at = datetime.now()
@@ -39,7 +40,7 @@ class BaseModel:
         dict["updated_at"] = self.updated_at.isoformat()
         dict["__class__"] = type(self).__name__
 
-        return dict 
+        return dict
 
     def __str__(self):
         """ Returns or Prints an official string representation of the class"""

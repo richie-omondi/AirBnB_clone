@@ -11,6 +11,7 @@ from models.engine.file_storage import FileStorage
 import models
 from models.base_model import BaseModel
 
+
 class TestFileStorage_docs(unittest.TestCase):
     """ Unit tests for testing documentation in class FileStorage"""
 
@@ -34,21 +35,21 @@ class TestFileStorage_docs(unittest.TestCase):
                 __import__("models.engine.file_storage")
                 .engine.file_storage.FileStorage.save.__doc__)
         self.assertGreater(len(methodDoc), 0)
-    
+
     def test_methodDocsAll(self):
         """ Test whether the all() method has documentation"""
         methodDoc = (
                 __import__("models.engine.file_storage")
                 .engine.file_storage.FileStorage.all.__doc__)
         self.assertGreater(len(methodDoc), 0)
-    
+
     def test_methodDocsNew(self):
         """ Test whether the new() method has documentation"""
         methodDoc = (
                 __import__("models.engine.file_storage")
                 .engine.file_storage.FileStorage.new.__doc__)
         self.assertGreater(len(methodDoc), 0)
-    
+
     def test_methodDocsReload(self):
         """ Test whether the reload() method has documentation"""
         methodDoc = (
@@ -56,15 +57,22 @@ class TestFileStorage_docs(unittest.TestCase):
                 .engine.file_storage.FileStorage.reload.__doc__)
         self.assertGreater(len(methodDoc), 0)
 
+
 class TestFileStorage_instantiation(unittest.TestCase):
     """Unittests for testing instantiation of the FileStorage class."""
 
     def test_FileStorage_instantiation_with_no_arguments(self):
-        """ Test whether the class FileStorage is instantiated with no arguments"""
+        """
+        Test whether the class FileStorage
+        is instantiated with no arguments
+        """
         self.assertEqual(type(FileStorage()), FileStorage)
 
     def test_FileStorage_instantiation_with_arguments(self):
-        """ Test whether the class FileStorage is  instantiated with arguments"""
+        """
+        Test whether the class FileStorage
+        is instantiated with arguments
+        """
         with self.assertRaises(TypeError):
             FileStorage(None)
 
@@ -76,6 +84,7 @@ class TestFileStorage_instantiation(unittest.TestCase):
         """ Test whether the __objects dictionary is private"""
         self.assertEqual(dict, type(FileStorage._FileStorage__objects))
 
+
 class TestFileStorage_methods(unittest.TestCase):
     """ Unittests for testing methods of the FileStorage class """
 
@@ -84,31 +93,44 @@ class TestFileStorage_methods(unittest.TestCase):
         self.assertEqual(dict, type(models.storage.all()))
 
     def test_all_with_arg(self):
-        """ Test whether an exception is raised when None is passed as an argument to the metod"""
+        """
+        Test whether an exception is raised when None
+        is passed as an argument to the method
+        """
         with self.assertRaises(TypeError):
             models.storage.all(None)
 
     def test_new_with_args(self):
         """ Test whether an exception is raised when an instance and
-            an integer value of 1 is passed to the method 
+            an integer value of 1 is passed to the method
         """
         with self.assertRaises(TypeError):
             models.storage.new(BaseModel(), 1)
-    
+
     def test_new_with_None(self):
-        """ Test whether an exception is raised when None is passed as an argument to the method"""
+        """
+        Test whether an exception is raised when None is
+        passed as an argument to the method
+        """
         with self.assertRaises(AttributeError):
             models.storage.new(None)
-    
+
     def test_save_with_arg(self):
-        """ Test whether an exception is raised when None is passed as an argument to the method"""
+        """
+        Test whether an exception is raised when None
+        is passed as an argument to the method
+        """
         with self.assertRaises(TypeError):
             models.storage.save(None)
 
     def test_reload_with_arg(self):
-        """ Test whether an excpetion is raised when None is passed as an argument to the method """
+        """
+        Test whether an excpetion is raised when None
+        is passed as an argument to the method
+        """
         with self.assertRaises(TypeError):
             models.storage.reload(None)
+
 
 if __name__ == "__main__":
     unittest.main()
