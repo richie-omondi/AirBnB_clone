@@ -2,6 +2,7 @@
 """ The entry point of the command interpreter """
 import cmd
 import models
+import re
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -76,7 +77,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """
-        Docs
+        Usage: show <class> <id> or <class>.show(<id>)
+        Display the string representation of a class instance of a given id
         """
         allowed_classes = [
                 "BaseModel", "User", "State",
@@ -103,7 +105,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, arg):
         """
-        Docs
+        Usage: destroy <class> <id> or <class>.destroy(<id>)
+        Delete a class instance of a given id
         """
         allowed_classes = [
                 "BaseModel", "User", "State",
@@ -131,7 +134,9 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """
-        Docs
+        Usage: all or all <class> or <class>.all()
+        Display string representations of all instances of a given class.
+        If no class is specified, displays all instantiated objects
         """
         allowed_classes = [
                 "BaseModel", "User", "State",
@@ -156,7 +161,11 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, arg):
         """
-        Docs
+        Usage: update <class> <id> <attribute_name> <attribute_value> or
+       <class>.update(<id>, <attribute_name>, <attribute_value>) or
+       <class>.update(<id>, <dictionary>)
+        Update a class instance of a given id by adding or updating
+        a given attribute key/value pair or dictionary
         """
         allowed_classes = [
                 "BaseModel", "User", "State",
@@ -192,6 +201,109 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
 
+    def do_User(self, arg):
+        """
+        Executes the method called on the User class
+        """
+        class_name = "User"
+        self.data_model_func(arg, class_name)
+
+    def do_BaseModel(self, arg):
+        """
+        Executes the method called on class BaseModel
+        """
+        class_name = "BaseModel"
+        self.data_model_func(arg, class_name)
+
+    def do_State(self, arg):
+        """
+        Executes the method called on the State class
+        """
+        class_name = "State"
+        self.data_model_func(arg, class_name)
+
+    def do_City(self, arg):
+        """
+        Executes the method called on the City class
+        """
+        class_name = "City"
+        self.data_model_func(arg, class_name)
+
+    def do_Amenity(self, arg):
+        """
+        Executes the method called on the Amenity class
+        """
+        class_name = "Amenity"
+        self.data_model_func(arg, class_name)
+
+    def do_Place(self, arg):
+        """
+        Executes the method called on the Place class
+        """
+        class_name = "Place"
+        self.data_model_func(arg, class_name)
+
+    def do_Review(self, arg):
+        """
+        Executes the method called on the Review class
+        """
+        class_name = "Review"
+        self.data_model_func(arg, class_name)
+
+    def execute_method(self, arg, class_name):
+        """
+        Executes a method on a class based on the
+        class_name and argument (method) passed to
+        the function
+        """
+        allowed_methods = [".all()", ".count()"]
+        show_regex = re.compile(r"\.show\(\"(.*?)\"\)")
+        delete_regex = re.compile(r"\.destroy\(\"(.*?)\"\)")
+        update_regex = re.compile(r"\.update\(\"(.*?)\", \"(.*?)\", (.*?)\)")
+        update_dict_regex = re.compile(r"\.update\(\"(.*?)\",(.*?)\)")
+        if len(arg) > 0:
+            args_array = arg.split()
+            if len(args_array) > 0:
+                command_method = args_array[0]
+                if command_method in allowed_methods:
+                    if command_method == ".all()":
+                        self.do_all(class_name)
+                    if command_method == ".count()":
+                        self.get_count(class_name)
+                elif (show_regex.search(args_array[0]) is not None):
+                    obj_id = show_regex.search(args_array[0]).group(1)
+                    self.do_show("{} {}".format(class_name, obj_id))
+                elif (delete_regex.search(args_array[0]) is not None):
+                    obj_id = delete_regex.search(args_array[0]).group(1)
+                    self.do_destroy("{} {}".format(class_name, obj_id))
+                elif (update_regex.search(arg) is not None):
+                    obj_id = update_regex.search(arg).group(1)
+                    obj_attr_name = update_regex.search(arg).group(2)
+                    obj_attr_value = update_regex.search(arg).group(3)
+                    self.do_update("{} {} {} {}".format(
+                        class_name, obj_id, obj_attr_name, obj_attr_value))
+                elif (update_dict_regex.search(arg) is not None):
+                    obj_id = update_dict_regex.search(arg).group(1)
+                    obj_dict = eval(update_dict_regex.search(arg).group(2))
+                    for key, value in obj_dict.items():
+                        self.do_update("{} {} {} {}".format(
+                            class_name, obj_id, key, value))
+
+    def get_count(self, class_name):
+        """
+        Retrieves the number of instances of a class
+        """
+        allowed_classes = [
+                "BaseModel", "User", "State",
+                "City", "Amenity", "Place", "Review"]
+        if class_name in allowed_classes:
+            final_list = []
+            for key, value in models.storage.all().items():
+                if (class_name in key):
+                    final_list.append(str(value))
+            print(len(final_list))
+        else:
+            print("** class doesn't exist **")
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
