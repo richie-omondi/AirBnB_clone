@@ -10,6 +10,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     """ The command processor """
 
@@ -126,8 +127,8 @@ class HBNBCommand(cmd.Cmd):
                 else:
                     print("** class doesn't exist **")
         else:
-            print("** class name missing **")           
-    
+            print("** class name missing **")
+
     def do_all(self, arg):
         """
         Docs
@@ -190,6 +191,7 @@ class HBNBCommand(cmd.Cmd):
                     print("** class doesn't exist **")
         else:
             print("** class name missing **")
-    
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
