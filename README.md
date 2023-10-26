@@ -18,7 +18,7 @@ The console is a `Unix` shell-like command line user interface provided by the p
 
 | Command | Example   |
 | ------- | --------- |
-|Display commands help| `(hbnb) help <command>`                                                        |             
+|Display help command| `(hbnb) help <command>`                                                        |             
 |Create object (prints its id)	      | `(hbnb) create <class>`                                        |
 |Destroy object	                      | `(hbnb) destroy <class> <id>` or `(hbnb) <class>.destroy(<id>)`|
 |Show object                          | `(hbnb) show <class> <id>` or `(hbnb) <class>.show(<id>)`      |
@@ -54,13 +54,13 @@ Help command example
   
 ## Environment
 
-This project is interpreted/tested on `Ubuntu 14.04 LTS` using python3 (version 3.11.5)
+This project is interpreted/tested on `Ubuntu 14.04 LTS` using `python3` (version 3.11.5)
 
 ## Installation
 
-* Clone this repository: `git clone https://github.com/richie-oomondi/AirBnB_clone.git`
-* Access AirBnb directory: `cd AirBnB_clone`
-* Run hbnb(interactively): `./console` and enter command
+* Clone this repository: `git clone https://github.com/richie-oomondi/AirBnB_command_interpreter.git`
+* Access AirBnb directory: `cd AirBnB_command_interpreter`
+* Run hbnb(interactively): `./console.py` and enter command
 * Run hbnb(non-interactively): `echo "<command>" | ./console.py`
 
 ## Tests
